@@ -26,7 +26,7 @@ const Navbar = () => {
 	return (
 		<div className='navbar-container'>
 			<div className='logo'>
-				<Text fontSize='xl' fontWeight='bold'>
+				<Text fontSize='xl' fontWeight='medium'>
 					join.tsh.io
 				</Text>
 			</div>
