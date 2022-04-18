@@ -3,9 +3,11 @@ import ProductTile from '../ProductTile/ProductTile';
 import { Icon, Text } from '@chakra-ui/react';
 import { IoClipboardOutline } from 'react-icons/io5';
 import './ProductList.css';
+import ProductDetails from '../ProductDetails/ProductDetails';
 
 const ProductsList = () => {
 	const productsCount = 8;
+	const productDetails = true;
 
 	return (
 		<div className='products-list-container'>
@@ -40,6 +42,7 @@ const ProductsList = () => {
 					</Text>
 				</div>
 			)}
+			{productDetails && <ProductDetails />}
 		</div>
 	);
 };
