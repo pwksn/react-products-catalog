@@ -12,16 +12,21 @@ import {
 	PopoverTrigger,
 	PopoverContent,
 	PopoverBody,
-	PopoverCloseButton,
 	PopoverArrow,
-	PopoverHeader,
 } from '@chakra-ui/react';
 import { IoSearchSharp } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
-	const isLoggedIn = true;
+	const isLoggedIn = localStorage.getItem('user');
+
+	const history = useHistory();
+
+	const handleLogout = () => {
+		localStorage.removeItem('user');
+		history.push('/login');
+	};
 
 	return (
 		<div className='navbar-container'>
@@ -60,7 +65,9 @@ const Navbar = () => {
 						<PopoverContent className='logout-button'>
 							<PopoverArrow />
 							<PopoverBody>
-								<Button variant='ghost'>Logout</Button>
+								<Button variant='ghost' onClick={handleLogout}>
+									Logout
+								</Button>
 							</PopoverBody>
 						</PopoverContent>
 					</Popover>
