@@ -4,10 +4,11 @@ import { Icon, Text } from '@chakra-ui/react';
 import { IoClipboardOutline } from 'react-icons/io5';
 import './ProductList.css';
 import ProductDetails from '../ProductDetails/ProductDetails';
+import Pagination from '../Pagination/Pagination';
 
 const ProductsList = () => {
 	const productsCount = 8;
-	const productDetails = true;
+	const productDetails = false;
 
 	return (
 		<div className='products-list-container'>
@@ -24,7 +25,7 @@ const ProductsList = () => {
 						<ProductTile />
 					</div>
 					<div className='products-pagination'>
-						<span>1 2 3</span>
+						<Pagination />
 					</div>
 				</>
 			) : (
