@@ -5,14 +5,18 @@ import { IoClipboardOutline } from 'react-icons/io5';
 import './ProductList.css';
 import ProductDetails from '../ProductDetails/ProductDetails';
 import Pagination from '../Pagination/Pagination';
+import { useSelector } from 'react-redux';
 
 const ProductsList = () => {
 	const productsCount = 8;
 	const productDetails = false;
+	const products = useSelector((state) => state.products);
+
+	console.log(products);
 
 	return (
 		<div className='products-list-container'>
-			{productsCount ? (
+			{products.length ? (
 				<>
 					<div className='products-tiles'>
 						<ProductTile />
