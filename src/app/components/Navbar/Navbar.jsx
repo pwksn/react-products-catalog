@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Text,
 	Avatar,
@@ -16,12 +16,64 @@ import {
 } from '@chakra-ui/react';
 import { IoSearchSharp } from 'react-icons/io5';
 import { Link, useHistory } from 'react-router-dom';
+import {
+	getProducts,
+	getProductsBySearch,
+	getProductsByFilters,
+	getProductsBySearchAndFilters,
+} from '../../../actions/products';
 import './Navbar.css';
+import { useDispatch } from 'react-redux';
 
 const Navbar = () => {
 	const isLoggedIn = localStorage.getItem('user');
+	const [search, setSearch] = useState('');
+	const [filters, setFilters] = useState({
+		isPromoChecked: false,
+		isActiveChecked: false,
+	});
 
 	const history = useHistory();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		searchProducts();
+	}, [filters]);
+
+	const handleKeyDown = (e) => {
+		if (e.keyCode === 13) {
+			searchProducts();
+		}
+	};
+
+	const searchProducts = () => {
+		if (
+			search.trim() &&
+			(filters.isPromoChecked || filters.isActiveChecked)
+		) {
+			dispatch(
+				getProductsBySearchAndFilters(
+					search,
+					filters.isPromoChecked ? filters.isPromoChecked : null,
+					filters.isActiveChecked ? filters.isActiveChecked : null
+				)
+			);
+		} else if (
+			(!search.trim() && filters.isPromoChecked) ||
+			filters.isActiveChecked
+		) {
+			dispatch(
+				getProductsByFilters(
+					filters.isPromoChecked ? filters.isPromoChecked : null,
+					filters.isActiveChecked ? filters.isActiveChecked : null
+				)
+			);
+		} else if (search.trim()) {
+			dispatch(getProductsBySearch(search));
+		} else {
+			dispatch(getProducts());
+		}
+	};
 
 	const handleLogout = () => {
 		localStorage.removeItem('user');
@@ -42,6 +94,11 @@ const Navbar = () => {
 						color: 'inherit',
 						fontWeight: 'medium',
 					}}
+					value={search}
+					onChange={(e) => {
+						setSearch(e.target.value);
+					}}
+					onKeyDown={handleKeyDown}
 				/>
 				<InputRightElement
 					pointerEvents='none'
@@ -49,8 +106,28 @@ const Navbar = () => {
 				/>
 			</InputGroup>
 			<div className='checkbox'>
-				<Checkbox colorScheme='brand'>Active</Checkbox>
-				<Checkbox colorScheme='brand'>Promo</Checkbox>
+				<Checkbox
+					colorScheme='brand'
+					onChange={(e) =>
+						setFilters((state) => ({
+							...state,
+							isActiveChecked: e.target.checked,
+						}))
+					}
+				>
+					Active
+				</Checkbox>
+				<Checkbox
+					colorScheme='brand'
+					onChange={(e) =>
+						setFilters((state) => ({
+							...state,
+							isPromoChecked: e.target.checked,
+						}))
+					}
+				>
+					Promo
+				</Checkbox>
 			</div>
 
 			<div className='navbar-left'>
