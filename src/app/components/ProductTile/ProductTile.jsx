@@ -1,23 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProductTile.css';
 import { Text, Button, Icon } from '@chakra-ui/react';
 import { IoStar, IoStarOutline } from 'react-icons/io5';
 
-const ProductTile = () => {
-	const isAvailable = true;
-	const isPromo = false;
+const ProductTile = ({
+	name,
+	description,
+	rating,
+	image,
+	isPromo,
+	isActive,
+}) => {
+	const [ratingStars, setRatingStars] = useState([]);
+
+	useEffect(() => {
+		prepareRatingStars();
+	}, [rating]);
+
+	const prepareRatingStars = () => {
+		const stars = [];
+		for (let i = 1; i <= 5; i++) {
+			if (i <= rating) {
+				stars.push(<Icon color='orange.500' as={IoStar} key={i} />);
+			} else {
+				stars.push(
+					<Icon color='gray.500' as={IoStarOutline} key={i} />
+				);
+			}
+		}
+		setRatingStars(stars);
+	};
 
 	return (
 		<div className='product-tile-container'>
 			{isPromo && <div className='product-promo-badge'>Promo</div>}
-			<img
-				src='https://www.mobimaniak.pl/wp-content/uploads/gsmmaniak/2020/03/xbox-series-x-3.jpg'
-				alt='Logo'
-			/>
+			<img src={image} alt='Logo' />
 			<div className='product-tile-content'>
 				<div>
 					<Text fontSize='xl' fontWeight='medium'>
-						Product Name
+						{name}
 					</Text>
 					<Text
 						className='product-description'
@@ -25,22 +46,12 @@ const ProductTile = () => {
 						fontWeight='medium'
 						color='gray.500'
 					>
-						The Alsos Mission was an Allied unit formed to
-						investigate Axis scientific developments, especially
-						nuclear, chemical and biological weapons, as part of the
-						Manhattan Project during World War II. Colonel Boris
-						Pash, a former Manhattan P
+						{description}
 					</Text>
 				</div>
 				<div>
-					<div className='product-rating'>
-						<Icon color='orange.500' as={IoStar} />
-						<Icon color='orange.500' as={IoStar} />
-						<Icon color='orange.500' as={IoStar} />
-						<Icon color='orange.500' as={IoStar} />
-						<Icon color='gray.500' as={IoStarOutline} />
-					</div>
-					{isAvailable ? (
+					<div className='product-rating'>{ratingStars}</div>
+					{isActive ? (
 						<Button
 							isFullWidth
 							colorScheme='brand'

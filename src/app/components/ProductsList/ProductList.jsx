@@ -19,14 +19,17 @@ const ProductsList = () => {
 			{products.length ? (
 				<>
 					<div className='products-tiles'>
-						<ProductTile />
-						<ProductTile />
-						<ProductTile />
-						<ProductTile />
-						<ProductTile />
-						<ProductTile />
-						<ProductTile />
-						<ProductTile />
+						{products.map((product) => (
+							<ProductTile
+								key={product.id}
+								name={product.name}
+								description={product.description}
+								rating={product.rating}
+								image={product.image}
+								isPromo={product.promo}
+								isActive={product.active}
+							/>
+						))}
 					</div>
 					<div className='products-pagination'>
 						<Pagination />
