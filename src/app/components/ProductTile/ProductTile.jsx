@@ -10,6 +10,7 @@ const ProductTile = ({
 	image,
 	isPromo,
 	isActive,
+	showProductDetails,
 }) => {
 	const [ratingStars, setRatingStars] = useState([]);
 
@@ -56,6 +57,9 @@ const ProductTile = ({
 							isFullWidth
 							colorScheme='brand'
 							fontWeight={400}
+							onClick={() =>
+								showProductDetails(name, description, image)
+							}
 						>
 							Show details
 						</Button>

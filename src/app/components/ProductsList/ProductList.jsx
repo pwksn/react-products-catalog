@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProductTile from '../ProductTile/ProductTile';
 import { Icon, Text } from '@chakra-ui/react';
 import { IoClipboardOutline } from 'react-icons/io5';
@@ -9,10 +9,14 @@ import { useSelector } from 'react-redux';
 
 const ProductsList = () => {
 	const productsCount = 8;
-	const productDetails = false;
 	const products = useSelector((state) => state.products);
+	const [productDetails, setProductDetails] = useState(false);
+	const [selectedProduct, setSelectedProduct] = useState({});
 
-	console.log(products);
+	const showProductDetails = (name, description, image) => {
+		setSelectedProduct({ name, description, image });
+		setProductDetails(true);
+	};
 
 	return (
 		<div className='products-list-container'>
@@ -28,6 +32,7 @@ const ProductsList = () => {
 								image={product.image}
 								isPromo={product.promo}
 								isActive={product.active}
+								showProductDetails={showProductDetails}
 							/>
 						))}
 					</div>
@@ -50,7 +55,12 @@ const ProductsList = () => {
 					</Text>
 				</div>
 			)}
-			{productDetails && <ProductDetails />}
+			{productDetails && (
+				<ProductDetails
+					product={selectedProduct}
+					handleClose={() => setProductDetails(false)}
+				/>
+			)}
 		</div>
 	);
 };
