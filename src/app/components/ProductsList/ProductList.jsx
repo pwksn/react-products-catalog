@@ -5,11 +5,14 @@ import { IoClipboardOutline } from 'react-icons/io5';
 import './ProductList.css';
 import ProductDetails from '../ProductDetails/ProductDetails';
 import Pagination from '../Pagination/Pagination';
+import { useQuery } from '../../../hooks/useQuery';
 import { useSelector } from 'react-redux';
 
 const ProductsList = () => {
 	const productsCount = 8;
-	const products = useSelector((state) => state.products);
+	const { products } = useSelector((state) => state.products);
+	const query = useQuery();
+	const page = Number(query.get('page') || 1);
 	const [productDetails, setProductDetails] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState({});
 
@@ -20,7 +23,7 @@ const ProductsList = () => {
 
 	return (
 		<div className='products-list-container'>
-			{products.length ? (
+			{products?.length ? (
 				<>
 					<div className='products-tiles'>
 						{products.map((product) => (
@@ -37,7 +40,7 @@ const ProductsList = () => {
 						))}
 					</div>
 					<div className='products-pagination'>
-						<Pagination />
+						<Pagination currentPage={page} />
 					</div>
 				</>
 			) : (

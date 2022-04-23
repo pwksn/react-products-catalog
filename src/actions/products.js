@@ -1,11 +1,10 @@
 import * as api from '../api';
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts = (page) => async (dispatch) => {
 	try {
-		const { data } = await api.fetchProducts();
-		const { items } = data;
+		const { data } = await api.fetchProducts(page);
 
-		dispatch({ type: 'FETCH_ALL', payload: items });
+		dispatch({ type: 'FETCH_ALL', payload: data });
 	} catch (error) {
 		console.log(error);
 	}
@@ -14,9 +13,8 @@ export const getProducts = () => async (dispatch) => {
 export const getProductsBySearch = (search) => async (dispatch) => {
 	try {
 		const { data } = await api.fetchProductsBySearch(search);
-		const { items } = data;
 
-		dispatch({ type: 'FETCH_BY_SEARCH', payload: items });
+		dispatch({ type: 'FETCH_BY_SEARCH', payload: data });
 	} catch (error) {
 		console.log(error);
 	}
@@ -25,9 +23,8 @@ export const getProductsBySearch = (search) => async (dispatch) => {
 export const getProductsByFilters = (promo, active) => async (dispatch) => {
 	try {
 		const { data } = await api.fetchProductsByFilters(promo, active);
-		const { items } = data;
 
-		dispatch({ type: 'FETCH_BY_FILTERS', payload: items });
+		dispatch({ type: 'FETCH_BY_FILTERS', payload: data });
 	} catch (error) {
 		console.log(error);
 	}
@@ -41,9 +38,8 @@ export const getProductsBySearchAndFilters =
 				promo,
 				active
 			);
-			const { items } = data;
 
-			dispatch({ type: 'FETCH_BY_FILTERS', payload: items });
+			dispatch({ type: 'FETCH_BY_FILTERS', payload: data });
 		} catch (error) {
 			console.log(error);
 		}

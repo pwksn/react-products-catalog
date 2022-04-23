@@ -2,12 +2,11 @@ import axios from 'axios';
 
 const productsURL = 'https://join-tsh-api-staging.herokuapp.com/products';
 
-export const fetchProducts = (search, promo, active) =>
+export const fetchProducts = (page) =>
 	axios.get(productsURL, {
 		params: {
-			search: search ?? null,
-			promo: promo ?? null,
-			active: active ?? null,
+			page: page,
+			limit: 8,
 		},
 	});
 

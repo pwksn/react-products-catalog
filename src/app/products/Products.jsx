@@ -19,9 +19,9 @@ export const Products = () => {
 	const page = query.get('page') || 1;
 	const searchQuery = query.get('searchQuery');
 
-	useEffect(() => {
-		dispatch(getProducts());
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	dispatch(getProducts());
+	// }, [dispatch]);
 
 	return (
 		<div className='products-container'>

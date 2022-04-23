@@ -71,7 +71,7 @@ const Navbar = () => {
 		} else if (search.trim()) {
 			dispatch(getProductsBySearch(search));
 		} else {
-			dispatch(getProducts());
+			dispatch(getProducts(1));
 		}
 	};
 

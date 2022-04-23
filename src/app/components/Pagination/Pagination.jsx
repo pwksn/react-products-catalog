@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Pagination.css';
+import { getProducts } from '../../../actions/products';
 
-const Pagination = () => {
-	const totalPages = 20;
-	const currentPage = 3;
+const Pagination = ({ currentPage }) => {
+	// const totalPages = 20;
+	// const currentPage = 3;
+	const { totalPages } = useSelector((state) => state.products);
 	const [pagesToDisplay, setPagesToDisplay] = useState([]);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (currentPage) dispatch(getProducts(currentPage));
+		console.log(currentPage);
+	}, [currentPage]);
 
 	useEffect(() => {
 		preparePagesToDisplay();
@@ -48,7 +57,7 @@ const Pagination = () => {
 				colorScheme='black'
 				variant='link'
 				as={Link}
-				to='/login'
+				to={`/products?page=1`}
 			>
 				First
 			</Button>
@@ -63,12 +72,12 @@ const Pagination = () => {
 							colorScheme='black'
 							variant='link'
 							as={Link}
-							to='/login'
+							to={`/products?page=${page}`}
 						>
 							{page}
 						</Button>
 					))}
-					<span>...</span>
+					{totalPages > 6 && <span>...</span>}
 					{pagesToDisplay.slice(3, 6).map((page) => (
 						<Button
 							className={
@@ -78,7 +87,7 @@ const Pagination = () => {
 							colorScheme='black'
 							variant='link'
 							as={Link}
-							to='/login'
+							to={`/products?page=${page}`}
 						>
 							{page}
 						</Button>
@@ -90,7 +99,7 @@ const Pagination = () => {
 				colorScheme='black'
 				variant='link'
 				as={Link}
-				to='/login'
+				to={`/products?page=${totalPages}`}
 			>
 				Last
 			</Button>
