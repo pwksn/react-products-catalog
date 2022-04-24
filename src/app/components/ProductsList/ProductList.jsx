@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import ProductTile from '../ProductTile/ProductTile';
-import { Icon, Text } from '@chakra-ui/react';
+import { Icon, list, Text } from '@chakra-ui/react';
 import { IoClipboardOutline } from 'react-icons/io5';
 import './ProductList.css';
 import ProductDetails from '../ProductDetails/ProductDetails';
@@ -15,6 +15,13 @@ const ProductsList = () => {
 	const page = Number(query.get('page') || 1);
 	const [productDetails, setProductDetails] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState({});
+	const listRef = createRef();
+
+	useEffect(() => {
+		if (products) {
+			listRef.current.scrollTo(0, 0);
+		}
+	}, [products]);
 
 	const showProductDetails = (name, description, image) => {
 		setSelectedProduct({ name, description, image });
@@ -25,7 +32,7 @@ const ProductsList = () => {
 		<div className='products-list-container'>
 			{products?.length ? (
 				<>
-					<div className='products-tiles'>
+					<div className='products-tiles' ref={listRef}>
 						{products.map((product) => (
 							<ProductTile
 								key={product.id}

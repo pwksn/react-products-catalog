@@ -24,6 +24,7 @@ import {
 } from '../../../actions/products';
 import './Navbar.css';
 import { useDispatch } from 'react-redux';
+import { useQuery } from '../../../hooks/useQuery';
 
 const Navbar = () => {
 	const isLoggedIn = localStorage.getItem('user');
@@ -32,16 +33,23 @@ const Navbar = () => {
 		isPromoChecked: false,
 		isActiveChecked: false,
 	});
+	const query = useQuery();
+	const page = Number(query.get('page') || 1);
 
 	const history = useHistory();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		searchProducts();
+	}, [filters, page]);
+
+	useEffect(() => {
+		history.push('/products');
 	}, [filters]);
 
 	const handleKeyDown = (e) => {
 		if (e.keyCode === 13) {
+			history.push('/products');
 			searchProducts();
 		}
 	};
@@ -55,7 +63,8 @@ const Navbar = () => {
 				getProductsBySearchAndFilters(
 					search,
 					filters.isPromoChecked ? filters.isPromoChecked : null,
-					filters.isActiveChecked ? filters.isActiveChecked : null
+					filters.isActiveChecked ? filters.isActiveChecked : null,
+					page
 				)
 			);
 		} else if (
@@ -65,13 +74,14 @@ const Navbar = () => {
 			dispatch(
 				getProductsByFilters(
 					filters.isPromoChecked ? filters.isPromoChecked : null,
-					filters.isActiveChecked ? filters.isActiveChecked : null
+					filters.isActiveChecked ? filters.isActiveChecked : null,
+					page
 				)
 			);
 		} else if (search.trim()) {
-			dispatch(getProductsBySearch(search));
+			dispatch(getProductsBySearch(search, page));
 		} else {
-			dispatch(getProducts(1));
+			dispatch(getProducts(page));
 		}
 	};
 
@@ -83,7 +93,7 @@ const Navbar = () => {
 	return (
 		<div className='navbar-container'>
 			<div className='logo'>
-				<Text fontSize='xl' fontWeight='medium'>
+				<Text fontSize='xl' fontWeight='medium' as={Link} to={'/'}>
 					join.tsh.io
 				</Text>
 			</div>
@@ -135,8 +145,8 @@ const Navbar = () => {
 					<Popover arrowSize={1} placement='bottom-start'>
 						<PopoverTrigger>
 							<Avatar
-								name='Dan Abrahmov'
-								src='https://bit.ly/dan-abramov'
+								name='Paweł Kopciara'
+								src='https://media-exp1.licdn.com/dms/image/C4D03AQHXdgu9EXPOEQ/profile-displayphoto-shrink_200_200/0/1603644326783?e=2147483647&v=beta&t=NjniNf8sikO0KZEBSFfDK90aW5GVySG95D09n8vQlM4'
 							/>
 						</PopoverTrigger>
 						<PopoverContent className='logout-button'>

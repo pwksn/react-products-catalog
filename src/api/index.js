@@ -10,19 +10,28 @@ export const fetchProducts = (page) =>
 		},
 	});
 
-export const fetchProductsBySearch = (searchQuery) =>
-	axios.get(productsURL, { params: { search: searchQuery } });
-
-export const fetchProductsByFilters = (promo, active) =>
+export const fetchProductsBySearch = (searchQuery, page) =>
 	axios.get(productsURL, {
-		params: { promo: promo ?? null, active: active ?? null },
+		params: { search: searchQuery, page: page, limit: 8 },
 	});
 
-export const fetchProductsBySearchAndFilters = (search, promo, active) =>
+export const fetchProductsByFilters = (promo, active, page) =>
+	axios.get(productsURL, {
+		params: {
+			promo: promo ?? null,
+			active: active ?? null,
+			page: page,
+			limit: 8,
+		},
+	});
+
+export const fetchProductsBySearchAndFilters = (search, promo, active, page) =>
 	axios.get(productsURL, {
 		params: {
 			search: search,
 			promo: promo ?? null,
 			active: active ?? null,
+			page: page,
+			limit: 8,
 		},
 	});

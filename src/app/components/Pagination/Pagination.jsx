@@ -6,16 +6,14 @@ import './Pagination.css';
 import { getProducts } from '../../../actions/products';
 
 const Pagination = ({ currentPage }) => {
-	// const totalPages = 20;
-	// const currentPage = 3;
 	const { totalPages } = useSelector((state) => state.products);
 	const [pagesToDisplay, setPagesToDisplay] = useState([]);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (currentPage) dispatch(getProducts(currentPage));
-		console.log(currentPage);
-	}, [currentPage]);
+	// useEffect(() => {
+	// 	if (currentPage) dispatch(getProducts(currentPage));
+	// 	console.log(currentPage);
+	// }, [currentPage]);
 
 	useEffect(() => {
 		preparePagesToDisplay();

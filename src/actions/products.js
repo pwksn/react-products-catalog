@@ -10,9 +10,9 @@ export const getProducts = (page) => async (dispatch) => {
 	}
 };
 
-export const getProductsBySearch = (search) => async (dispatch) => {
+export const getProductsBySearch = (search, page) => async (dispatch) => {
 	try {
-		const { data } = await api.fetchProductsBySearch(search);
+		const { data } = await api.fetchProductsBySearch(search, page);
 
 		dispatch({ type: 'FETCH_BY_SEARCH', payload: data });
 	} catch (error) {
@@ -20,23 +20,29 @@ export const getProductsBySearch = (search) => async (dispatch) => {
 	}
 };
 
-export const getProductsByFilters = (promo, active) => async (dispatch) => {
-	try {
-		const { data } = await api.fetchProductsByFilters(promo, active);
+export const getProductsByFilters =
+	(promo, active, page) => async (dispatch) => {
+		try {
+			const { data } = await api.fetchProductsByFilters(
+				promo,
+				active,
+				page
+			);
 
-		dispatch({ type: 'FETCH_BY_FILTERS', payload: data });
-	} catch (error) {
-		console.log(error);
-	}
-};
+			dispatch({ type: 'FETCH_BY_FILTERS', payload: data });
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 export const getProductsBySearchAndFilters =
-	(search, promo, active) => async (dispatch) => {
+	(search, promo, active, page) => async (dispatch) => {
 		try {
 			const { data } = await api.fetchProductsBySearchAndFilters(
 				search,
 				promo,
-				active
+				active,
+				page
 			);
 
 			dispatch({ type: 'FETCH_BY_FILTERS', payload: data });
