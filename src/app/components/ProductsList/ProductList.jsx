@@ -1,6 +1,6 @@
 import React, { createRef, useEffect, useState } from 'react';
 import ProductTile from '../ProductTile/ProductTile';
-import { Icon, list, Text } from '@chakra-ui/react';
+import { Icon, Text } from '@chakra-ui/react';
 import { IoClipboardOutline } from 'react-icons/io5';
 import './ProductList.css';
 import ProductDetails from '../ProductDetails/ProductDetails';
@@ -9,7 +9,6 @@ import { useQuery } from '../../../hooks/useQuery';
 import { useSelector } from 'react-redux';
 
 const ProductsList = () => {
-	const productsCount = 8;
 	const { products } = useSelector((state) => state.products);
 	const query = useQuery();
 	const page = Number(query.get('page') || 1);
@@ -18,7 +17,7 @@ const ProductsList = () => {
 	const listRef = createRef();
 
 	useEffect(() => {
-		if (products) {
+		if (products?.length) {
 			listRef.current.scrollTo(0, 0);
 		}
 	}, [products]);

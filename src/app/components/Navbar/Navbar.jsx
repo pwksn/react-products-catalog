@@ -170,51 +170,6 @@ const Navbar = () => {
 				)}
 			</div>
 		</div>
-		// <div className="navbar-container">
-		// 	<div className="navbar-left">
-		// 		<div className="logo">
-		// 			<Text fontSize="xl" fontWeight="bold">
-		// 				join.tsh.io
-		// 			</Text>
-		// 		</div>
-		// 		<div className="filters">
-		// 	<InputGroup>
-		// 		<Input
-		// 			placeholder="Search"
-		// 			_placeholder={{
-		// 				color: 'inherit',
-		// 				fontWeight: 'medium',
-		// 			}}
-		// 		/>
-		// 		<InputRightElement
-		// 			pointerEvents="none"
-		// 			children={
-		// 				<Icon color="gray.700" as={IoSearchSharp} />
-		// 			}
-		// 		/>
-		// 	</InputGroup>
-		// 	<Checkbox colorScheme="brand">Active</Checkbox>
-		// 	<Checkbox colorScheme="brand">Promo</Checkbox>
-		// </div>
-		// 	</div>
-		// <div>
-		// 	{isLoggedIn ? (
-		// 		<Avatar
-		// 			name="Dan Abrahmov"
-		// 			src="https://bit.ly/dan-abramov"
-		// 		/>
-		// 	) : (
-		// 		<Button
-		// 			colorScheme="brand"
-		// 			variant="outline"
-		// 			as={Link}
-		// 			to="/login"
-		// 		>
-		// 			Log in
-		// 		</Button>
-		// 	)}
-		// </div>
-		// </div>
 	);
 };
 
