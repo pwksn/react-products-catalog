@@ -4,11 +4,11 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
 const Wrapper = ({ children }) => {
-  return <Router>{children}</Router>;
+	return <Router>{children}</Router>;
 };
 
 function customRender(ui, options) {
-  return render(ui, { wrapper: options?.wrapper ?? Wrapper, ...options });
+	return render(ui, { wrapper: options?.wrapper ?? Wrapper, ...options });
 }
 
 // re-export everything

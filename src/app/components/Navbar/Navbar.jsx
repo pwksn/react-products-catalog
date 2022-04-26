@@ -26,7 +26,7 @@ import './Navbar.css';
 import { useDispatch } from 'react-redux';
 import { useQuery } from '../../../hooks/useQuery';
 
-const Navbar = () => {
+export const Navbar = () => {
 	const isLoggedIn = localStorage.getItem('user');
 	const [search, setSearch] = useState('');
 	const [filters, setFilters] = useState({

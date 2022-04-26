@@ -39,7 +39,7 @@ export const Login = () => {
 				<Text className='login-logo' fontSize='xl' fontWeight='medium'>
 					join.tsh.io
 				</Text>
-				<div className='login-form' onSubmit={handleSubmit}>
+				<div className='login-form'>
 					<Text
 						fontSize='3xl'
 						fontWeight='medium'
@@ -47,20 +47,21 @@ export const Login = () => {
 					>
 						Login
 					</Text>
-					<form>
+					<form onSubmit={handleSubmit}>
 						<FormControl isRequired className='login-form-control'>
-							<FormLabel htmlFor='first-name'>Username</FormLabel>
+							<FormLabel htmlFor='username'>Username</FormLabel>
 							<Input
-								id='first-name'
+								id='username'
 								placeholder='Enter username'
 								value={username}
 								onChange={(e) => setUsername(e.target.value)}
 							/>
 						</FormControl>
 						<FormControl isRequired className='login-form-control'>
-							<FormLabel htmlFor='first-name'>Password</FormLabel>
+							<FormLabel htmlFor='password'>Password</FormLabel>
 							<InputGroup size='md'>
 								<Input
+									id='password'
 									pr='4.5rem'
 									type={show ? 'text' : 'password'}
 									placeholder='Enter password'
@@ -85,6 +86,7 @@ export const Login = () => {
 							colorScheme='brand'
 							className='login-button'
 							type='submit'
+							disabled={!username || !password}
 						>
 							Log in
 						</Button>

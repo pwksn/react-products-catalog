@@ -5,15 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Pagination.css';
 import { getProducts } from '../../../actions/products';
 
-const Pagination = ({ currentPage }) => {
+export const Pagination = ({ currentPage }) => {
 	const { totalPages } = useSelector((state) => state.products);
 	const [pagesToDisplay, setPagesToDisplay] = useState([]);
-	const dispatch = useDispatch();
-
-	// useEffect(() => {
-	// 	if (currentPage) dispatch(getProducts(currentPage));
-	// 	console.log(currentPage);
-	// }, [currentPage]);
 
 	useEffect(() => {
 		preparePagesToDisplay();

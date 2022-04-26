@@ -8,7 +8,7 @@ import Pagination from '../Pagination/Pagination';
 import { useQuery } from '../../../hooks/useQuery';
 import { useSelector } from 'react-redux';
 
-const ProductsList = () => {
+export const ProductsList = () => {
 	const { products } = useSelector((state) => state.products);
 	const query = useQuery();
 	const page = Number(query.get('page') || 1);
