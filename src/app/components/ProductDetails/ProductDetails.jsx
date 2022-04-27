@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Button, Icon } from '@chakra-ui/react';
+import { Text, Icon } from '@chakra-ui/react';
 import { IoClose } from 'react-icons/io5';
 import './ProductDetails.css';
 

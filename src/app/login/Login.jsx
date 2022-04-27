@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
 	Text,
 	FormControl,
 	FormLabel,
-	FormErrorMessage,
-	FormHelperText,
 	Input,
 	InputGroup,
 	InputRightElement,
 	Button,
 } from '@chakra-ui/react';
 
-import { AppRoute } from '../../routing/AppRoute.enum';
 import './Login.css';
 import loginPhoto from '../../images/login-photo.jpg';
 

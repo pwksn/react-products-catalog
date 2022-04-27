@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './Pagination.css';
-import { getProducts } from '../../../actions/products';
 
 export const Pagination = ({ currentPage }) => {
 	const { totalPages } = useSelector((state) => state.products);
